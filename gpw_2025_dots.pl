@@ -14,7 +14,9 @@ use Data::Dump;
 {
     ## no critic qw(Mama::Don't::Allow::No::Perl::Golfing::Around::Here)
 
-    # disk space is cheap, no need for non-idiomatic Perl
+    # I don't care what mama don't allow
+    # I'll golf my Perl anyhow
+    RIP_JJ_CALE:
     my @p2 =  1 .. 3;
     dd [ p2 => \@p2 ];
 }
