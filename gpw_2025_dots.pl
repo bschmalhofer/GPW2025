@@ -1,69 +1,106 @@
-use v5.12;    # for the ellipsis ...
 use strict;
 use warnings;
 
 use Data::Dump;
 
-# Range mit drei Punktion in freier Wildbahn, sprich OTOBO, angetroffen.
+# Range mit drei Punkten in freier Wildbahn, sprich OTOBO, angetroffen.
 # Das muss man doch optimieren können.
-my @a1 = 1 ... 3;
-dd [ a1 => \@a1 ];
+{
+    my @p3 = 1 ... 3;
+    dd [ p3 => \@p3 ];
+}
 
 # dasselbe wie Range mit zwei Punkten
-my @a2 =  1 .. 3;
-dd [ a2 => \@a2 ];
+{
+    ## no critic qw(Mama::Don't::ællow::No::Perl::Golfing::Around::Here)
 
-# Was gibt es sonst noch mit drei Punkten ?
+    # disk space is cheap, no need for non-idioatic Perl
+    my @p2 =  1 .. 3;
+    dd [ p2 => \@p2 ];
+}
+
+WAS_GIBT_ES_SONST_NOCH_MIT_DREI_PUNKTEN:
 
 # yada-yada
-eval { ... };
-dd [ eval_error => $@ ];
-
-# Testdaten
-my $data_start = tell DATA;
-dd [ testdaten => [ <DATA> ] ];
-
-# flip-flop
-seek DATA, $data_start, 0;
-while ( <DATA> ) {
-    print if 10 ... /400/;
+{
+    eval { ... };
+    dd [ eval_error => $@ ];
 }
 
-# Geht es besser?
+GEHT_DA_NOCH_WAS:
 
-# vier Punkte
-my @a3 = -2 ....1;
-dd [ a3 => \@a3 ];
+# vier Punkte mit flip/flop
+my $data_start = tell DATA;
+{
+    # Testdaten
+    dd [ testdaten => [ <DATA> ] ];
+
+    seek DATA, $data_start, 0;
+    while ( <DATA> ) {
+        print if m.1....m.3.;
+    }
+}
+
+# vier Punkte mit Bereich
+{
+    my @p4 = -2 ....1;
+    dd [ p4 => \@p4 ];
+}
 
 # fünf Punkte sind schwierig
-my @a4 = -2. ....1;
-dd [ a4 => \@a4 ];
+{
+    my @p4 = -2. ....1;
+    dd [ p4 => \@p4 ];
 
-# flip-flop auch nur maximal vier Punkte
-seek DATA, $data_start, 0;
-while ( <DATA> ) {
-    print if 2*8+6. ....0;
+    # flip-flop auch nur maximal vier Punkte
+    seek DATA, $data_start, 0;
+    while ( <DATA> ) {
+        print if 2*8+6. ....0;
+    }
+
+    # mit Konkatenierung kommt man auch nicht weit
+    my $s1 = 2. . .1;
+    dd [ s1 => $s1 ];
 }
 
-# Konkatenierung ist sinnlos
-my $s1 = 2. . .1;
-dd [ s1 => $s1 ];
+# der Zeilenzähler reißt die Sache raus
+{
+    # aber nicht mit Konkatenierung
+    $. = -.0;
+    my $s1 = $
+    . . .1;
+    dd [ s1 => $s1 ];
 
-# Variante mit Zeilenzähler
-$. = -.0;
-my $s2 = $
-. . .1;
-dd [ s2 => $s2 ];
+    # sondern mit Bereich
+    $. = +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-3;
+    my @p5 = $              .....0;
+    dd [ p5 => \@p5 ];
+}
 
-$. = +-+-+-+-+-+-+-3;
-my @a5 = $              .....0;
-dd [ a5 => \@a5 ];
+# oder so
+{
+    # Testdaten
+    seek DATA, $data_start, 0;
+    dd [ testdaten => [ <DATA> ] ];
+
+    seek DATA, $data_start, 0;
+    while ( <DATA> ) {
+        print if m.4.....4; HOMAGE_TO_M4:
+    }
+}
+
+# bei sechs Punkten fällt mit nichts mehr ein
+{
+    eval { ...;... }; ## no critic qw(Complain::About::Judiciously::Injected::Semicolons)
+    dd [ eval_error => $@ ];
+}
 
 # Cheat modus
 
-# mit format
-$. = 123456789;
-format STDOUT =
+# Lügem mit Format
+{
+    $. = 123456789;
+    format STDOUT =
 ......................................
 ...........@..........................
 $.
@@ -71,27 +108,31 @@ $.
 .
 .0;
 
-write;
+    write;
+}
 
 # Im Semikolon ist ja auch ein Punkt
-;;;;;;;;;;;;;;;;;;
-eval { ...;...;...;...;... };
-dd [ eval_error => $@ ];
+{
+    ## no critic qw(Lower::Half::Counts)
+    ;;;;;;;;;;;;;;;;;;
+    eval { ...;...;...;...;... };
+    dd [ eval_error => $@ ];
+}
 
 # oder im Bang
-my $s3 = !!!!!!!!!!!!!!!!!!!!!!!!!!!!!$.;
-dd [ s3 => $s3 ];
+{
+    ## no critic qw(Lower::Half::Counts)
+    my $whatever = !!!!!!!!!!!!!!!!!!!!!!!!!!!!!$.;
+    dd [ whatever => $whatever ];
+}
 
 # https://perlhacks.com/2014/01/dots-perl/
 # https://github.com/RotherOSS/otobo/issues/4040
 # https://rt.cpan.org/Ticket/Display.html?id=158636
 
 __DATA__
-100
-200
-300
-400
-500
-600
-700
-800
+Kopfzeile
+1.Zeile
+2.Zeile
+3.Zeile
+4.Zeile
