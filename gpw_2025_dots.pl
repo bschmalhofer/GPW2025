@@ -12,9 +12,9 @@ use Data::Dump;
 
 # dasselbe wie Range mit zwei Punkten
 {
-    ## no critic qw(Mama::Don't::ællow::No::Perl::Golfing::Around::Here)
+    ## no critic qw(Mama::Don't::Allow::No::Perl::Golfing::Around::Here)
 
-    # disk space is cheap, no need for non-idioatic Perl
+    # disk space is cheap, no need for non-idiomatic Perl
     my @p2 =  1 .. 3;
     dd [ p2 => \@p2 ];
 }
@@ -121,7 +121,7 @@ $.
 
 # oder im Bang
 {
-    ## no critic qw(Lower::Half::Counts)
+    ## no critic qw(Upper::Two::Thirds::Count)
     my $whatever = !!!!!!!!!!!!!!!!!!!!!!!!!!!!!$.;
     dd [ whatever => $whatever ];
 }
