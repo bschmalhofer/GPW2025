@@ -1,7 +1,6 @@
-use strict;
-use warnings;
+use strict; use warnings; use Data::Dump;
 
-use Data::Dump;
+dd( [ remind_me => '{{v' ] );
 
 # Range mit drei Punkten in freier Wildbahn, sprich OTOBO, angetroffen.
 # Das muss man doch optimieren können.
@@ -45,6 +44,7 @@ my $data_start = tell DATA;
     while ( <DATA> ) {
         print if m.1....m.3.;
     }
+    $DB::single = 1;
 }
 
 # vier Punkte mit Bereich
@@ -63,6 +63,7 @@ my $data_start = tell DATA;
     while ( <DATA> ) {
         print if 2*8+6. ....0;
     }
+    $DB::single = 1;
 
     # mit Konkatenierung kommt man auch nicht weit
     my $s1 = 2. . .1;
@@ -93,6 +94,7 @@ my $data_start = tell DATA;
     while ( <DATA> ) {
         print if m.4.....4; HOMAGE_TO_M4:
     }
+    $DB::single = 1;
 }
 
 FINALE: $_ = $.;
