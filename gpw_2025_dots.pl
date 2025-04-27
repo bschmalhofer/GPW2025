@@ -27,6 +27,10 @@ WAS_GIBT_ES_SONST_NOCH_MIT_DREI_PUNKTEN:
 {
     eval { ... };
     dd [ eval_error => $@ ];
+
+    # do muas aba a greislicher Strichpunkt eine wen ma meare yadas hischreim wui
+    eval { ...;... }; ## no critic qw(Complain::About::Judiciously::Injected::Semicolons)
+    dd [ eval_error => $@ ];
 }
 
 GEHT_DA_NOCH_WAS:
@@ -91,16 +95,32 @@ my $data_start = tell DATA;
     }
 }
 
-# bei sechs Punkten fällt mit nichts mehr ein
+FINALE: $_ = $.;
 {
-    eval { ...;... }; ## no critic qw(Complain::About::Judiciously::Injected::Semicolons)
-    dd [ eval_error => $@ ];
+    my @p5 = m.4.....1;
+    dd [ p5 => \@p5 ];
+
+    EINFACH_MAL_WEGLASSEN_WAS_STOERT:
+    my @p6 = m......1;
+    dd [ p6 => \@p6 ];
+
+    # Oana geht no
+    my @p7 = s.......1;
+    dd [ p7 => \@p7 ];
 }
 
-# Cheat modus
+
+## no critic qw(You::Are::Not::Paid::By::LOC);
+BONUS:
+BONUS:
+BONUS:
+HABEN_WIR_NOCH_ZEIT:
+CHEAT_MODE:
 
 # Lügem mit Format
 {
+    ## no critic qw(Avoid::Code::That::Nobody::Understands::Without::Perldoc)
+
     $. = 123456789;
     format STDOUT =
 ......................................
@@ -116,16 +136,21 @@ $.
 # Im Semikolon ist ja auch ein Punkt
 {
     ## no critic qw(Lower::Half::Counts)
-    ;;;;;;;;;;;;;;;;;;
-    eval { ...;...;...;...;... };
+    eval { ;;;...;;;...;;;...;;;...;;; };
     dd [ eval_error => $@ ];
+}
+
+# Doppelpunkte sind nur halb so gut
+{
+    ## no critic qw(Lower::Half::Counts)
+    dd [ X => $::::::::::::::::::::::::::::::::::X ];
 }
 
 # oder im Bang
 {
     ## no critic qw(Upper::Two::Thirds::Count)
-    my $whatever = !!!!!!!!!!!!!!!!!!!!!!!!!!!!!$.;
-    dd [ whatever => $whatever ];
+    my $irgendwas_mit_einem_haufen_bangs = !!!!!!!!!!!!!!!!!!!!!!!!!!!!!$!;
+    dd [ irgendwas_mit_einem_haufen_bangs => $irgendwas_mit_einem_haufen_bangs ];
 }
 
 # https://perlhacks.com/2014/01/dots-perl/
