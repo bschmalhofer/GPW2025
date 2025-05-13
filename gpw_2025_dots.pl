@@ -4,7 +4,10 @@ no warnings 'void';
 
 use Data::Dump qw(dd);
 
-"{{ -     for viewing preceeding lines";
+<<INTRO;
+Vortrag zum Thema Ticketing.
+Der Code eines 🎫 Systems soll optimiert werden.
+INTRO
 
 {
     ## no critic qw(Don't::Abuse::The::Subscript::Separator)
