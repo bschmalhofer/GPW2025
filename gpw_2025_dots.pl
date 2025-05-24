@@ -5,7 +5,7 @@ no warnings 'void';
 use Data::Dump qw(dd);
 
 <<INTRO;
-Vortrag zum Thema Ticketing.
+Der zweite Vortrag zum Thema Ticketing.
 Der Code eines 🎫 Systems soll optimiert werden.
 INTRO
 
@@ -20,6 +20,8 @@ INTRO
     my @p3 = 1 ... 3;
     dd \@p3;
 }
+# Zielfunktion: möglichst viele Punkte hintereinander
+# Die Nebenbedingung sinnvoller Effekt wird zuerst ignoriert.
 --$;->$*;
 'p3';
 
